@@ -14,18 +14,24 @@
     padding-top: 10px;
 }
 
-.gallary__main>div:first-child{
+.gallary__item__featured{
     grid-column: 1/span 2;
     grid-row: 1 / span 2;
+    
+}
+.isDragging{
+    opacity: 0;
 }
 
 .gallary__item{
-    border: 1px solid gray;
+   
     border-radius: 5px;
     box-sizing: border-box;
+    max-width: 100%;
 }
 
 .gallary__item img{
+    border: 1px solid gray;
     border-radius: 5px;
     max-width: 100%;
 }

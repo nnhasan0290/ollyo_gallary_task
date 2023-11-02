@@ -1,4 +1,6 @@
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { GlobalContext } from "../utils/Context";
+import DraggableImg from "./Draggable";
 
 const Gallary = () => {
   const {
@@ -10,13 +12,10 @@ const Gallary = () => {
       <div className="border-b py-4 gallary__head">
         <h2>Gallary</h2>
       </div>
-      <div className="gallary__main gap-5 grid-cols-5 py-3">
+
+      <div className="gallary__main ">
         {items.map((item, index) => {
-          return (
-            <div key={index} className={` gallary__item`}>
-              <img src={item.image} alt="" />
-            </div>
-          );
+          return <DraggableImg key={item.id} item={item} index={index} />;
         })}
       </div>
     </div>
