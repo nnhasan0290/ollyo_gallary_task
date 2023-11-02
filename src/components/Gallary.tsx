@@ -1,25 +1,58 @@
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { GlobalContext } from "../utils/Context";
-import DraggableImg from "./Draggable";
+import update from 'immutability-helper'
+import type { FC } from 'react'
+import { useCallback, useState } from 'react'
+import { Card } from './Draggable'
+import assets from '../assets'
 
-const Gallary = () => {
-  const {
-    state: { data: items },
-  } = GlobalContext();
 
-  return (
-    <div className="gallary">
-      <div className="border-b py-4 gallary__head">
-        <h2>Gallary</h2>
-      </div>
+// const style = {
+//   width: 400,
+// }
 
-      <div className="gallary__main ">
-        {items.map((item, index) => {
-          return <DraggableImg key={item.id} item={item} index={index} />;
-        })}
-      </div>
-    </div>
-  );
-};
+export interface Item {
+  id: number
+  text: string
+}
 
-export default Gallary;
+export interface ContainerState {
+  cards: Item[]
+}
+
+export const Container: FC = () => {
+  {
+    const [cards, setCards] = useState(assets.data)
+
+    const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
+      setCards((prevCards) =>
+        update(prevCards, {
+          $splice: [
+            [dragIndex, 1],
+            [hoverIndex, 0, prevCards[dragIndex]],
+          ],
+        }),
+      )
+    }, [])
+
+    const renderCard = useCallback(
+      (card: { id: number; text: string }, index: number) => {
+        return (
+          <Card
+            key={card.id}
+            index={index}
+            id={card.id}
+            image={card.image}
+            moveCard={moveCard}
+          />
+        )
+      },
+      [],
+    )
+
+    return (
+      <>
+        <div className='gallary__main'>{cards.map((card, i) => renderCard(card, i))}</div>
+      </>
+    )
+  }
+}
+
