@@ -1,5 +1,6 @@
 import { CSSProperties } from "react";
 import { XYCoord, useDragLayer } from "react-dnd";
+import { DragTypes } from "./types/dndTypes";
 
 const CustomDragLayer = () => {
   const {
@@ -33,7 +34,7 @@ const CustomDragLayer = () => {
           ),
         }}
       >
-        {itemType === "IMAGE" && (
+        {itemType === DragTypes.IMAGECARD && (
           <img
             style={{
               border: "1px solid gray",
@@ -59,7 +60,6 @@ const layerStyles: CSSProperties = {
   top: 0,
   width: "100%",
   height: "100%",
-  // border: "10px solid red",
 };
 
 function getDragLayerStyles(
@@ -74,8 +74,10 @@ function getDragLayerStyles(
   }
 
   // let { x, y } = currentOffset;
-  const x = (initialCursorOffset as XYCoord)?.x + (currentOffset.x - initialOffset.x);
-  const y = (initialCursorOffset as XYCoord)?.y + (currentOffset.y - initialOffset.y);
+  const x =
+    (initialCursorOffset as XYCoord)?.x + (currentOffset.x - initialOffset.x);
+  const y =
+    (initialCursorOffset as XYCoord)?.y + (currentOffset.y - initialOffset.y);
 
   const transform = `translate(${x}px, ${y}px)`;
   return {

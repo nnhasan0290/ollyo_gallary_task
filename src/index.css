@@ -40,7 +40,8 @@ body{
   border: 1px solid gray;
   border-radius: 10px;
   transition: all 0.5s;
-  
+  position: relative;
+  cursor: move;
 }
 .animate{
   animation: example;
@@ -52,6 +53,44 @@ body{
   overflow: hidden;
   border-radius: 10px;
   object-fit: cover;
+}
+
+.gallary__item img::after{
+  content: "";
+  height: 100%;
+  width: 100%;
+  background-color: blue;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.gallary__item__after{
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  box-sizing: border-box;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+.gallary__item__after.no_hover{
+  background-color: white;
+}
+
+input[type=checkbox]{
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.gallary__item:hover .gallary__item__after{
+  visibility: visible;
+  opacity: 1;
 }
 
 

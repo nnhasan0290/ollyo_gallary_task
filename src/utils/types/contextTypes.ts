@@ -1,6 +1,6 @@
 export enum ReducerActionKind {
     DELETEITEM = 'DELETEITEM',
-    UPDATEITEM = 'UPDATEITEM'
+    MOVEITEM = 'MOVEITEM'
 }
 
 export interface ReducerAction {

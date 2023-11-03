@@ -1,11 +1,11 @@
-import CustomDragLayer from "./components/CustomDragLayer";
+import CustomDragLayer from "./utils/CustomDragLayer";
 import { Container } from "./components/Container";
 
 function App() {
   return (
     <div className="App">
-      <Container/>
-      <CustomDragLayer/>
+      <Container />
+      <CustomDragLayer />
     </div>
   );
 }
