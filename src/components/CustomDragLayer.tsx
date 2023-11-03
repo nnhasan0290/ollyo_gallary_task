@@ -2,35 +2,50 @@ import { CSSProperties } from "react";
 import { XYCoord, useDragLayer } from "react-dnd";
 
 const CustomDragLayer = () => {
-  const { itemType, isDragging, item, initialOffset, currentOffset } =
-    useDragLayer((monitor) => ({
-      item: monitor.getItem(),
-      itemType: monitor.getItemType(),
-      initialOffset: monitor.getInitialSourceClientOffset(),
-      currentOffset: monitor.getSourceClientOffset(),
-      isDragging: monitor.isDragging(),
-    }));
+  const {
+    itemType,
+    isDragging,
+    item,
+    initialCursorOffset,
+    initialOffset,
+    currentOffset,
+  } = useDragLayer((monitor) => ({
+    item: monitor.getItem(),
+    itemType: monitor.getItemType(),
+    initialCursorOffset: monitor.getInitialClientOffset(),
+    initialOffset: monitor.getInitialSourceClientOffset(),
+    currentOffset: monitor.getSourceClientOffset(),
+    isDragging: monitor.isDragging(),
+  }));
 
   if (!isDragging) {
     return null;
   }
-  console.log(item);
 
   return (
     <div className="draglayer" style={layerStyles}>
-      <div style={getDragLayerStyles(initialOffset, currentOffset)}>
-        {
-          itemType === "IMAGE" && (
-
-            <img
-            style={{border: "1px solid gray", borderRadius: "5px"}}
+      <div
+        style={{
+          ...getDragLayerStyles(
+            initialCursorOffset,
+            initialOffset,
+            currentOffset
+          ),
+        }}
+      >
+        {itemType === "IMAGE" && (
+          <img
+            style={{
+              border: "1px solid gray",
+              borderRadius: "5px",
+              backgroundColor: "white",
+            }}
             width={item.ref.current.clientWidth}
             height={item.ref.current.clientHeight}
-              src={item?.image}
-              alt=""
-            />
-          )
-        }
+            src={item?.image}
+            alt=""
+          />
+        )}
       </div>
     </div>
   );
@@ -48,6 +63,7 @@ const layerStyles: CSSProperties = {
 };
 
 function getDragLayerStyles(
+  initialCursorOffset: XYCoord | null,
   initialOffset: XYCoord | null,
   currentOffset: XYCoord | null
 ) {
@@ -57,7 +73,9 @@ function getDragLayerStyles(
     };
   }
 
-  let { x, y } = currentOffset;
+  // let { x, y } = currentOffset;
+  const x = initialCursorOffset?.x + (currentOffset.x - initialOffset.x);
+  const y = initialCursorOffset?.y + (currentOffset.y - initialOffset.y);
 
   const transform = `translate(${x}px, ${y}px)`;
   return {

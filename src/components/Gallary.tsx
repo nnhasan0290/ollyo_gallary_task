@@ -1,13 +1,9 @@
 import update from 'immutability-helper'
-import type { FC } from 'react'
 import { useCallback, useState } from 'react'
 import { Card } from './Draggable'
 import assets from '../assets'
+import GallaryHead from './GallaryHead'
 
-
-// const style = {
-//   width: 400,
-// }
 
 export interface Item {
   id: number
@@ -18,7 +14,7 @@ export interface ContainerState {
   cards: Item[]
 }
 
-export const Container: FC = () => {
+export const Container = () => {
   {
     const [cards, setCards] = useState(assets.data)
 
@@ -50,7 +46,10 @@ export const Container: FC = () => {
 
     return (
       <>
+      <GallaryHead/>
+      <div className='gallary'>
         <div className='gallary__main'>{cards.map((card, i) => renderCard(card, i))}</div>
+      </div>
       </>
     )
   }

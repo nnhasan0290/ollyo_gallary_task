@@ -1,7 +1,8 @@
 import type { Identifier, XYCoord } from "dnd-core";
 import type { FC } from "react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
+import { getEmptyImage } from "react-dnd-html5-backend";
 
 // import { ItemTypes } from './ItemTypes'
 
@@ -55,32 +56,44 @@ export const Card = ({ id, image, index, moveCard }: any) => {
       const hoverBoundingRect = ref?.current?.getBoundingClientRect();
 
       // Get vertical middle
-      const hoverMiddleY =
-        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const hoveredY = hoverBoundingRect.bottom - hoverBoundingRect.top;
+
+      const hoveredX = hoverBoundingRect.right - hoverBoundingRect.left;
 
       // Determine mouse position
       const clientOffset = monitor.getClientOffset();
 
       // Get pixels to the top
-      const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
+      const draggedY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
+
+      const draggedX = (clientOffset as XYCoord).x - hoverBoundingRect.left;
 
       // Only perform the move when the mouse has crossed half of the items height
       // When dragging downwards, only move when the cursor is below 50%
       // When dragging upwards, only move when the cursor is above 50%
 
       // Dragging downwards
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        return;
-      }
+      // if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+      //   return;
+      // }
 
       // Dragging upwards
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+      if (
+        dragIndex > hoverIndex &&
+        (draggedY < hoveredY || draggedX < hoveredX)
+      ) {
+        // Time to actually perform the action
+
+        moveCard(dragIndex, hoverIndex);
+      } else if (
+        dragIndex < hoverIndex &&
+        (ref.current.clientHeight + clientOffset.y > hoverBoundingRect.top ||
+          ref.current.clientWidth + clientOffset.x > hoverBoundingRect.left)
+      ) {
+        moveCard(dragIndex, hoverIndex);
+      } else {
         return;
       }
-
-      // Time to actually perform the action
-      console.log(dragIndex, hoverIndex);
-      moveCard(dragIndex, hoverIndex);
 
       // Note: we're mutating the monitor item here!
       // Generally it's better to avoid mutations,
@@ -90,10 +103,10 @@ export const Card = ({ id, image, index, moveCard }: any) => {
     },
   });
 
-  const [{ isDragging }, drag] = useDrag({
+  const [{ isDragging }, drag, dragPreview] = useDrag({
     type: "IMAGE",
     item: () => {
-      return { id, index };
+      return { id, index, ref, image };
     },
     collect: (monitor: any) => ({
       isDragging: monitor.isDragging(),
@@ -102,13 +115,23 @@ export const Card = ({ id, image, index, moveCard }: any) => {
 
   const opacity = isDragging ? 0 : 1;
   drag(drop(ref));
+
+  useEffect(() => {
+    dragPreview(getEmptyImage());
+  }, []);
   return (
-    // <div
-     
-    //   style={{ ...style, opacity }}
-      
-    // >
-      <img className={`${index === 0 && "gallary__item__featured"}`} width={200}  ref={ref} src={image}  alt="" data-handler-id={handlerId} />
-    // </div>
+    <div
+      ref={ref}
+      className={`${index === 0 && "gallary__item__featured"} gallary__item`}
+      data-handler-id={handlerId}
+    >
+      <img style={{ opacity }} src={image} alt="" />
+    </div>
   );
+
+
+
+
+
+  
 };
