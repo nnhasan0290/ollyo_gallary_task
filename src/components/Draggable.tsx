@@ -1,6 +1,6 @@
 import type { Identifier, XYCoord } from "dnd-core";
 import type { FC } from "react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
 
@@ -28,6 +28,7 @@ interface DragItem {
 }
 
 export const Card = ({ id, image, index, moveCard }: any) => {
+  
   const ref = useRef<any>(null);
   const [{ handlerId }, drop] = useDrop<
     DragItem,
@@ -99,6 +100,7 @@ export const Card = ({ id, image, index, moveCard }: any) => {
       // Generally it's better to avoid mutations,
       // but it's good here for the sake of performance
       // to avoid expensive index searches.
+      
       item.index = hoverIndex;
     },
   });
@@ -122,7 +124,7 @@ export const Card = ({ id, image, index, moveCard }: any) => {
   return (
     <div
       ref={ref}
-      className={`${index === 0 && "gallary__item__featured"} gallary__item`}
+      className={`${index === 0 && "gallary__item__featured"} gallary__item `}
       data-handler-id={handlerId}
     >
       <img style={{ opacity }} src={image} alt="" />
