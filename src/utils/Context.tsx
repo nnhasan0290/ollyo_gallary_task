@@ -4,10 +4,22 @@ import {
   ContextInitial,
   InitialState,
   ReducerAction,
+  ReducerActionKind,
 } from "./types/contextTypes";
 import assets from "../assets";
 
 const reducer = (state: InitialState, action: ReducerAction) => {
+  switch (action.type) {
+    case ReducerActionKind.UPDATEITEM:
+      const {dragIndex, hoverIndex} = action.payload;
+      console.log(dragIndex, hoverIndex);
+      const copyData = [...state.data];
+   
+      break;
+  
+    default:
+      break;
+  }
   return state;
 };
 

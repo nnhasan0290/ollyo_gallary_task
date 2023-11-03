@@ -74,8 +74,8 @@ function getDragLayerStyles(
   }
 
   // let { x, y } = currentOffset;
-  const x = initialCursorOffset?.x + (currentOffset.x - initialOffset.x);
-  const y = initialCursorOffset?.y + (currentOffset.y - initialOffset.y);
+  const x = (initialCursorOffset as XYCoord)?.x + (currentOffset.x - initialOffset.x);
+  const y = (initialCursorOffset as XYCoord)?.y + (currentOffset.y - initialOffset.y);
 
   const transform = `translate(${x}px, ${y}px)`;
   return {

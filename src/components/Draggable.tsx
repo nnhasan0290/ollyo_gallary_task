@@ -1,18 +1,9 @@
 import type { Identifier, XYCoord } from "dnd-core";
-import type { FC } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
 
-// import { ItemTypes } from './ItemTypes'
 
-const style = {
-  border: "1px dashed gray",
-  padding: "0.5rem 1rem",
-  marginBottom: ".5rem",
-  backgroundColor: "white",
-  cursor: "move",
-};
 
 export interface CardProps {
   id: any;
@@ -73,12 +64,7 @@ export const Card = ({ id, image, index, moveCard }: any) => {
       // When dragging downwards, only move when the cursor is below 50%
       // When dragging upwards, only move when the cursor is above 50%
 
-      // Dragging downwards
-      // if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-      //   return;
-      // }
-
-      // Dragging upwards
+     
       if (
         dragIndex > hoverIndex &&
         (draggedY < hoveredY || draggedX < hoveredX)
@@ -87,9 +73,8 @@ export const Card = ({ id, image, index, moveCard }: any) => {
 
         moveCard(dragIndex, hoverIndex);
       } else if (
-        dragIndex < hoverIndex &&
-        (ref.current.clientHeight + clientOffset.y > hoverBoundingRect.top ||
-          ref.current.clientWidth + clientOffset.x > hoverBoundingRect.left)
+        dragIndex < hoverIndex &&(ref.current.clientHeight + (clientOffset as XYCoord).y > hoverBoundingRect.top ||
+          ref.current.clientWidth + (clientOffset as XYCoord).x > hoverBoundingRect.left)
       ) {
         moveCard(dragIndex, hoverIndex);
       } else {
@@ -120,7 +105,8 @@ export const Card = ({ id, image, index, moveCard }: any) => {
 
   useEffect(() => {
     dragPreview(getEmptyImage());
-  }, []);
+  }, [dragPreview]);
+
   return (
     <div
       ref={ref}

@@ -1,5 +1,5 @@
 import CustomDragLayer from "./components/CustomDragLayer";
-import { Container } from "./components/Gallary";
+import { Container } from "./components/Container";
 
 function App() {
   return (

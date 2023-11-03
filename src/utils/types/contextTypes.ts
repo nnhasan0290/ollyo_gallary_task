@@ -1,9 +1,11 @@
-enum ReducerActionKind {
+export enum ReducerActionKind {
     DELETEITEM = 'DELETEITEM',
+    UPDATEITEM = 'UPDATEITEM'
 }
 
 export interface ReducerAction {
     type: ReducerActionKind,
+    payload: any
 }
 
 export interface InitialState {
