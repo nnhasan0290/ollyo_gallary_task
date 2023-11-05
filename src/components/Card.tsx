@@ -7,8 +7,7 @@ import { GlobalContext } from "../utils/Context";
 import { ReducerActionKind } from "../utils/types/contextTypes";
 
 export const Card = ({ id, image, index, selected }: CardProps) => {
-  const { state, dispatch } = GlobalContext();
-  console.log(state);
+  const { dispatch } = GlobalContext();
   const [isHovered, setHovered] = useState(true);
   const { ref, isDragging, dragPreview, handlerId } = useImageDnd(
     id,
@@ -27,6 +26,7 @@ export const Card = ({ id, image, index, selected }: CardProps) => {
       ref={ref}
       className={`${index === 0 && "gallary__item__featured"} gallary__item `}
       data-handler-id={handlerId}
+      onDragEnd={() => setHovered(true)}
       onDragLeave={() => {
         setHovered(false);
       }}
@@ -49,10 +49,12 @@ export const Card = ({ id, image, index, selected }: CardProps) => {
         className={`gallary__item__overlay`}
       ></div>
 
-      {/* <div
+      <div
         className={`gallary__item__checkbox ${
           selected ? "showBackground" : "showOnlyOnHover"
-        } ${!selected && !isHovered && "hideCheckbox"} `}
+        } ${!selected && !isHovered && "hideCheckbox"} ${
+          isDragging && "hideCheckbox"
+        }`}
       >
         <CustomCheckMark
           id={id}
@@ -61,50 +63,7 @@ export const Card = ({ id, image, index, selected }: CardProps) => {
             dispatch({ type: ReducerActionKind.SELECTITEM, payload: { id } });
           }}
         />
-      </div> */}
+      </div>
     </div>
-    // <div
-    //   // style={{ zIndex: isDragging && "1000" }}
-    //   ref={ref}
-    //   className={`${index === 0 && "gallary__item__featured"} gallary__item `}
-    //   data-handler-id={handlerId}
-    //   onDragLeave={() => {
-    //     setHovered(false);
-    //   }}
-    //   onMouseOver={(e) => {
-    //     if (e.buttons !== 1) {
-    //       setHovered(true);
-    //     } else {
-    //       setHovered(false);
-    //     }
-    //   }}
-    // >
-    //   <img
-    //     className="gallary__item__img"
-    //     style={{ opacity }}
-    //     src={image}
-    //     alt=""
-    //   />
-    //   <div
-    //     style={{ backgroundColor: !isHovered ? "transparent" : "" }}
-    //     className={`gallary__item__overlay`}
-    //   ></div>
-
-    //   <div
-    //     className={`gallary__item__checkbox ${
-    //       selected ? "showBackground" : "showOnlyOnHover"
-    //     } ${!selected && !isHovered && "hideCheckbox"} ${
-    //       isDragging && "hideCheckbox"
-    //     }`}
-    //   >
-    //     <CustomCheckMark
-    //       id={id}
-    //       checked={selected}
-    //       onChange={() => {
-    //         dispatch({ type: ReducerActionKind.SELECTITEM, payload: { id } });
-    //       }}
-    //     />
-    //   </div>
-    // </div>
   );
 };
