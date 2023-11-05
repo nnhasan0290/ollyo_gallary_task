@@ -5,7 +5,7 @@ import { useDrag, useDrop } from "react-dnd";
 import { ReducerActionKind } from "../utils/types/contextTypes";
 import { GlobalContext } from "../utils/Context";
 
-export const useImageDnd = (id:any, index:number, image:string, setHovered:any) => {
+export const useImageDnd = (id:any, index:number, image:string, ) => {
 
     const { dispatch } = GlobalContext();
 
@@ -102,9 +102,7 @@ export const useImageDnd = (id:any, index:number, image:string, setHovered:any) 
     
         item.index = hoverIndex;
       },
-      drop: () => {
-        setHovered(true)
-      }
+    
     });
     
 

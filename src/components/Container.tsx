@@ -2,26 +2,18 @@ import { Card } from "./Card";
 import GallaryHead from "./GallaryHead";
 import { GlobalContext } from "../utils/Context";
 
-
-
 export const Container = () => {
   const {
-    state: { data: globalData }
+    state: { data: globalData },
   } = GlobalContext();
-
 
   return (
     <>
-      <GallaryHead />
       <div className="gallary">
+        <GallaryHead />
         <div className="gallary__main">
           {globalData.map((card, i) => (
-            <Card
-              key={card.id}
-              index={i}
-              id={card.id}
-              image={card.image}
-            />
+            <Card key={card.id} index={i} id={card.id} image={card.image} />
           ))}
         </div>
       </div>

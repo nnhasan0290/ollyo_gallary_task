@@ -1,28 +1,55 @@
-body{
-    margin: 0;
-    padding: 0;
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #EBEFF5;
+
 }
 
 .gallary {
   width: 90%;
   margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #FEFEFE;
+  border-radius: 10px;
 }
 
 .gallary__head {
-  border-bottom: 1px solid gray;
+  border-bottom: 2px solid #c2c2c2;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: capitalize;
 }
 
-.gallary__head h2{
-    width: 90%;
-    margin: auto;
-    padding: 15px;
+.gallary__head--left{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+}
+.gallary__head--right{
+  color: red;
+  cursor: pointer;
+
+}
+.gallary__head--right:hover{
+  text-decoration: underline;
+}
+
+.gallary__head h2 {
+  padding: 0;
+  margin: 0;
 }
 
 .gallary__main {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
-  padding-top: 15px;
+  padding: 2rem;
 }
 
 .gallary__item__featured {
@@ -37,13 +64,13 @@ body{
 .gallary__item {
   box-sizing: border-box;
   max-width: 100%;
-  border: 1px solid gray;
+  border: 2px solid #C2C2C2;
   border-radius: 10px;
   transition: all 0.5s;
   position: relative;
   cursor: move;
 }
-.animate{
+.animate {
   animation: example;
   animation-duration: 0.5s;
 }
@@ -55,16 +82,9 @@ body{
   object-fit: cover;
 }
 
-.gallary__item img::after{
-  content: "";
-  height: 100%;
-  width: 100%;
-  background-color: blue;
-  visibility: hidden;
-  opacity: 0;
-}
 
-.gallary__item__overlay{
+
+.gallary__item__overlay {
   position: absolute;
   top: 0;
   right: 0;
@@ -79,26 +99,38 @@ body{
   opacity: 0;
 }
 
-input[type=checkbox]{
+input[type="checkbox"] {
   height: 20px;
   width: 20px;
   cursor: pointer;
 }
 
-.gallary__item__checkbox{
+.gallary__item__checkbox {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 10%;
+  left: 10%;
 }
 
-.gallary__item:hover .gallary__item__overlay{
+.gallary__item:hover .gallary__item__overlay {
   visibility: visible;
   opacity: 1;
 }
 
 
-
-@keyframes example {
-  0%   {transform: translateX(-100%);}
-  100% {transform: translateX(0%);}
+@keyframes moved {
+  0% {
+    transform: translateX(50%) scale(0.5, 0.5);
+    transform-origin: top right;
+  }
+  100% {
+    transform: translateX(0%) scale(1, 1);
+  }
+}
+@keyframes dragged {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
 }

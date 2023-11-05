@@ -37,8 +37,8 @@ const CustomDragLayer = () => {
         {itemType === DragTypes.IMAGECARD && (
           <img
             style={{
-              border: "1px solid gray",
-              borderRadius: "5px",
+              border: "2px solid #C2C2C2",
+              borderRadius: "10px",
               backgroundColor: "white",
             }}
             width={item.ref.current.clientWidth}
@@ -55,7 +55,7 @@ const CustomDragLayer = () => {
 const layerStyles: CSSProperties = {
   position: "fixed",
   pointerEvents: "none",
-  zIndex: 100,
+  zIndex: 1001,
   left: 0,
   top: 0,
   width: "100%",

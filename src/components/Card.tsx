@@ -9,7 +9,6 @@ export const Card = ({ id, image, index }: CardProps) => {
     id,
     index,
     image,
-    setHovered
   );
 
   const opacity = isDragging ? 0 : 1;
@@ -21,6 +20,7 @@ export const Card = ({ id, image, index }: CardProps) => {
 
   return (
     <div
+    style={{zIndex: isDragging && "1000"}}
       ref={ref}
       className={`${index === 0 && "gallary__item__featured"} gallary__item `}
       data-handler-id={handlerId}
