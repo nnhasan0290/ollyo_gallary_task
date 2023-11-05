@@ -1,6 +1,7 @@
 export enum ReducerActionKind {
     DELETEITEM = 'DELETEITEM',
-    MOVEITEM = 'MOVEITEM'
+    MOVEITEM = 'MOVEITEM',
+    SELECTITEM = 'SELECTITEM',
 }
 
 export interface ReducerAction {
@@ -11,7 +12,8 @@ export interface ReducerAction {
 export interface InitialState {
    data: {
     id: string,
-    image: string
+    image: string,
+    selected: boolean
    }[]
 }
 

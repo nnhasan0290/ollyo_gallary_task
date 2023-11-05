@@ -13,7 +13,7 @@ export const Container = () => {
         <GallaryHead />
         <div className="gallary__main">
           {globalData.map((card, i) => (
-            <Card key={card.id} index={i} id={card.id} image={card.image} />
+            <Card key={card.id} index={i} id={card.id} image={card.image} selected={card.selected} />
           ))}
         </div>
       </div>

@@ -55,7 +55,7 @@ const CustomDragLayer = () => {
 const layerStyles: CSSProperties = {
   position: "fixed",
   pointerEvents: "none",
-  zIndex: 1001,
+  zIndex: 100,
   left: 0,
   top: 0,
   width: "100%",
