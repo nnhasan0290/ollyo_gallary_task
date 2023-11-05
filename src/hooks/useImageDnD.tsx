@@ -5,7 +5,7 @@ import { useDrag, useDrop } from "react-dnd";
 import { ReducerActionKind } from "../utils/types/contextTypes";
 import { GlobalContext } from "../utils/Context";
 
-export const useImageDnd = (id:any, index:number, image:string) => {
+export const useImageDnd = (id:any, index:number, image:string, setHovered:any) => {
 
     const { dispatch } = GlobalContext();
 
@@ -20,20 +20,22 @@ export const useImageDnd = (id:any, index:number, image:string) => {
         collect: (monitor: any) => ({
           isDragging: monitor.isDragging(),
         }),
+     
       });
 
 
 
 
-    const [{ handlerId }, drop] = useDrop<
+    const [{ handlerId, isOver }, drop] = useDrop<
       DragItem,
       void,
-      { handlerId: Identifier | null }
+      { handlerId: Identifier | null, isOver:any }
     >({
       accept: DragTypes.IMAGECARD,
       collect(monitor) {
         return {
           handlerId: monitor.getHandlerId(),
+          isOver: monitor.isOver()
         };
       },
       hover(item: DragItem, monitor) {
@@ -100,6 +102,9 @@ export const useImageDnd = (id:any, index:number, image:string) => {
     
         item.index = hoverIndex;
       },
+      drop: () => {
+        setHovered(true)
+      }
     });
     
 
