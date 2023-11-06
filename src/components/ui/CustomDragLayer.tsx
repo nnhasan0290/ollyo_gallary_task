@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 import { XYCoord, useDragLayer } from "react-dnd";
-import { DragTypes } from "./types/dndTypes";
+import { DragTypes } from "../../utils/types/dndTypes";
 
 const CustomDragLayer = () => {
   const {
@@ -75,9 +75,13 @@ function getDragLayerStyles(
 
   // let { x, y } = currentOffset;
   const x =
-    (initialCursorOffset as XYCoord)?.x + (currentOffset.x - initialOffset.x) - 20;
+    (initialCursorOffset as XYCoord)?.x +
+    (currentOffset.x - initialOffset.x) -
+    20;
   const y =
-    (initialCursorOffset as XYCoord)?.y + (currentOffset.y - initialOffset.y)- 20;
+    (initialCursorOffset as XYCoord)?.y +
+    (currentOffset.y - initialOffset.y) -
+    20;
 
   const transform = `translate(${x}px, ${y}px)`;
   return {

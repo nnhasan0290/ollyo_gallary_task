@@ -1,6 +1,6 @@
 import { Card } from "./Card";
 import GallaryHead from "./ui/GallaryHead";
-import { GlobalContext } from "../utils/Context";
+import { GlobalContext } from "../utils/context/Context";
 
 export const Container = () => {
   const {

@@ -1,4 +1,4 @@
-import { GlobalContext } from "../../utils/Context";
+import { GlobalContext } from "../../utils/context/Context";
 import { ReducerActionKind } from "../../utils/types/contextTypes";
 import CustomCheckMark from "./CustomCheckMark/CustomCheckMark";
 

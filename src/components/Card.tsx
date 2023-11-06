@@ -3,7 +3,7 @@ import { getEmptyImage } from "react-dnd-html5-backend";
 import { CardProps } from "../utils/types/dndTypes";
 import { useImageDnd } from "../hooks/useImageDnD";
 import CustomCheckMark from "./ui/CustomCheckMark/CustomCheckMark";
-import { GlobalContext } from "../utils/Context";
+import { GlobalContext } from "../utils/context/Context";
 import { ReducerActionKind } from "../utils/types/contextTypes";
 import useAnimation from "../hooks/useAnimation";
 
@@ -26,6 +26,7 @@ export const Card = ({ id, image, index, selected, prevPos }: CardProps) => {
 
   return (
     <div
+      style={{ zIndex: !isDragging ? index : 100 }}
       className={`${index === 0 && "gallary__item__featured"} gallary__item `}
     >
       <div

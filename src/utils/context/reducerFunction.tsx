@@ -1,26 +1,27 @@
-import { ReactNode, createContext, useContext, useReducer } from "react";
 import {
-  ContextInitial,
   InitialState,
   ReducerAction,
   ReducerActionKind,
-} from "./types/contextTypes";
-import assets from "../assets";
+} from "../types/contextTypes";
 
-const reducer = (state: InitialState, action: ReducerAction) => {
+export const Reducer = (state: InitialState, action: ReducerAction) => {
   switch (action.type) {
     case ReducerActionKind.MOVEITEM:
       const { dragIndex, hoverIndex } = action.payload;
       let copyData = [...state.data];
+
       const resetPos = copyData.map((item, i) => {
-        if (i >= hoverIndex && i <= dragIndex) {
-          return { ...item, previousPos: i };
-        } else if (i <= hoverIndex && i >= dragIndex) {
+        if (
+          (i >= hoverIndex && i <= dragIndex) ||
+          (i <= hoverIndex && i >= dragIndex)
+        ) {
           return { ...item, previousPos: i };
         }
+
         return item;
       });
       copyData = [...resetPos];
+
       const dragged__item = copyData.splice(dragIndex, 1);
       copyData.splice(hoverIndex, 0, dragged__item[0]);
 
@@ -47,23 +48,3 @@ const reducer = (state: InitialState, action: ReducerAction) => {
   }
   return state;
 };
-
-const AppContext = createContext<ContextInitial>({
-  state: assets,
-  dispatch: null,
-});
-
-const ContextProvider = ({ children }: { children: ReactNode }) => {
-  const [state, dispatch] = useReducer(reducer, assets);
-
-  return (
-    <AppContext.Provider value={{ state, dispatch }}>
-      {" "}
-      {children}{" "}
-    </AppContext.Provider>
-  );
-};
-
-export default ContextProvider;
-
-export const GlobalContext = () => useContext(AppContext) as ContextInitial;

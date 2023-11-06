@@ -1,4 +1,4 @@
-import CustomDragLayer from "./utils/CustomDragLayer";
+import CustomDragLayer from "./components/ui/CustomDragLayer";
 import { Container } from "./components/Container";
 
 function App() {
