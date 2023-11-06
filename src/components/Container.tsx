@@ -1,5 +1,5 @@
 import { Card } from "./Card";
-import GallaryHead from "./GallaryHead";
+import GallaryHead from "./ui/GallaryHead";
 import { GlobalContext } from "../utils/Context";
 
 export const Container = () => {
@@ -13,7 +13,14 @@ export const Container = () => {
         <GallaryHead />
         <div className="gallary__main">
           {globalData.map((card, i) => (
-            <Card key={card.id} index={i} id={card.id} image={card.image} selected={card.selected} />
+            <Card
+              key={card.id}
+              index={i}
+              id={card.id}
+              image={card.image}
+              selected={card.selected}
+              prevPos={card.previousPos}
+            />
           ))}
         </div>
       </div>

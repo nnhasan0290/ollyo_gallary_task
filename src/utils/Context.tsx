@@ -11,8 +11,16 @@ const reducer = (state: InitialState, action: ReducerAction) => {
   switch (action.type) {
     case ReducerActionKind.MOVEITEM:
       const { dragIndex, hoverIndex } = action.payload;
-      const copyData = [...state.data];
-
+      let copyData = [...state.data];
+      const resetPos = copyData.map((item, i) => {
+        if (i >= hoverIndex && i <= dragIndex) {
+          return { ...item, previousPos: i };
+        } else if (i <= hoverIndex && i >= dragIndex) {
+          return { ...item, previousPos: i };
+        }
+        return item;
+      });
+      copyData = [...resetPos];
       const dragged__item = copyData.splice(dragIndex, 1);
       copyData.splice(hoverIndex, 0, dragged__item[0]);
 

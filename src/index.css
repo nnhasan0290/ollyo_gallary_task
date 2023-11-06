@@ -66,6 +66,7 @@ body {
   transition: all 0.5s;
   position: relative;
   cursor: move;
+  transition: all 0.5s;
 }
 
 .gallary__item img {
@@ -140,3 +141,20 @@ p {
     transform: translateX(0%);
   }
 } */
+
+@media screen and (max-width: 624px) {
+  .gallary__main {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 1rem;
+  }
+
+  .gallary__head {
+    padding: 1rem 1rem;
+    font-size: 1rem;
+  }
+  .gallary__head--left {
+    gap: 0px;
+  }
+  
+}

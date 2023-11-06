@@ -26,7 +26,7 @@ export const useImageDnd = (id:any, index:number, image:string, ) => {
 
 
 
-    const [{ handlerId, isOver }, drop] = useDrop<
+    const [{ handlerId }, drop] = useDrop<
       DragItem,
       void,
       { handlerId: Identifier | null, isOver:any }

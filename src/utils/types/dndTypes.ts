@@ -9,6 +9,7 @@ export interface DragItem {
     image: string;
     index: number;
     selected: boolean;
+    prevPos: number | null;
   }
 
   export enum DragTypes{

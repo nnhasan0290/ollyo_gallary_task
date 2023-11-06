@@ -1,10 +1,11 @@
-import { GlobalContext } from "../utils/Context";
-import { ReducerActionKind } from "../utils/types/contextTypes";
-import CustomCheckMark from "./ui/CustomCheckMark/CustomCheckMark";
+import { GlobalContext } from "../../utils/Context";
+import { ReducerActionKind } from "../../utils/types/contextTypes";
+import CustomCheckMark from "./CustomCheckMark/CustomCheckMark";
 
 const GallaryHead = () => {
   const {
-    state: { data: globalData }, dispatch
+    state: { data: globalData },
+    dispatch,
   } = GlobalContext();
   const selectedData = globalData.filter((item) => item.selected === true);
 
@@ -18,9 +19,14 @@ const GallaryHead = () => {
             <CustomCheckMark checked={true} />
             <p> {selectedData?.length} files selected</p>
           </div>
-          <p className="gallary__head--right" onClick={() => {
-            dispatch({type: ReducerActionKind.DELETEITEM})
-          }}>Delete Files</p>
+          <p
+            className="gallary__head--right"
+            onClick={() => {
+              dispatch({ type: ReducerActionKind.DELETEITEM });
+            }}
+          >
+            Delete Files
+          </p>
         </>
       )}
     </div>
