@@ -4,6 +4,7 @@ body {
   background-color: #ebeff5;
 }
 
+/* container */
 .gallary {
   width: 90%;
   margin: auto;
@@ -13,6 +14,7 @@ body {
   border-radius: 10px;
 }
 
+/* gallary heading */
 .gallary__head {
   border-bottom: 2px solid #c2c2c2;
   padding: 1rem 2rem;
@@ -42,6 +44,8 @@ body {
   margin: 0;
 }
 
+/* gallary container */
+
 .gallary__main {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -49,6 +53,7 @@ body {
   padding: 2rem;
 }
 
+/* each card */
 .gallary__item__featured {
   width: 100%;
   grid-column: 1 / span 2;
@@ -124,23 +129,7 @@ p {
   margin: 0;
 }
 
-/* @keyframes moved {
-  0% {
-    transform: translateX(50%) scale(0.5, 0.5);
-    transform-origin: top right;
-  }
-  100% {
-    transform: translateX(0%) scale(1, 1);
-  }
-}
-@keyframes dragged {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(0%);
-  }
-} */
+/* media queries */
 
 @media screen and (max-width: 624px) {
   .gallary__main {
@@ -156,5 +145,4 @@ p {
   .gallary__head--left {
     gap: 0px;
   }
-  
 }

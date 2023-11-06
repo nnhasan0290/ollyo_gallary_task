@@ -10,6 +10,7 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
+  //global context
   <ContextProvider>
     <DndProvider backend={HTML5Backend}>
       <App />

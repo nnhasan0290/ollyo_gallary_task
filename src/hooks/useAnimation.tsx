@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useAnimation = (prevPos: any, index: any) => {
+  //creating animation rule for each card
   const [animation, setAnimation] = useState("");
   const addStylesheetRules = (rules: any) => {
     let styleEl = document.createElement("style");
@@ -9,6 +10,7 @@ const useAnimation = (prevPos: any, index: any) => {
     styleSheet.insertRule(rules, 0);
   };
 
+  //creating animation
   useEffect(() => {
     let animationName = `anim_${index}`;
     let keyframes = `
@@ -21,6 +23,7 @@ const useAnimation = (prevPos: any, index: any) => {
     setAnimation(animationName);
   }, [prevPos, index]);
 
+  // actual style to return
   const styles = {
     animationName: `${animation}`,
     animationDuration: "0.3s",
@@ -31,6 +34,7 @@ const useAnimation = (prevPos: any, index: any) => {
 
 export default useAnimation;
 
+//get the distance vertically and horizontally between these card card
 const get_distance_x = (prevPos: any, index: any) => {
   const elements = document.querySelectorAll(".gallary__item");
   const prevEl = elements[prevPos]?.getBoundingClientRect();
@@ -39,8 +43,6 @@ const get_distance_x = (prevPos: any, index: any) => {
   const distance_x = prevEl?.left - currentEl?.left;
   const distance_1 = prevEl?.top - currentEl?.top + prevEl?.height / 2;
   const distance_2 = prevEl?.bottom - currentEl?.bottom - prevEl?.height / 2;
-
-  console.log(prevEl);
 
   let gap_x = 0;
   let gap_y = 0;
@@ -51,7 +53,6 @@ const get_distance_x = (prevPos: any, index: any) => {
   if (prevEl?.top !== currentEl.top) {
     gap_y = currentEl?.top > prevEl?.top ? distance_1 : distance_2;
   }
-  // const gap_betw = prevEl?.left - currentEl?.left;
-  // console.log(gap_betw);
+
   return `${gap_x}px, ${gap_y}px`;
 };

@@ -8,6 +8,7 @@ import { GlobalContext } from "../utils/context/Context";
 export const useImageDnd = (id: any, index: number, image: string) => {
   const { dispatch } = GlobalContext();
 
+  // actual ref for drag and drop
   const ref = useRef<any>(null);
 
   const [{ isDragging }, drag, dragPreview] = useDrag({
@@ -61,8 +62,6 @@ export const useImageDnd = (id: any, index: number, image: string) => {
       const draggedX = (clientOffset as XYCoord).x - hoverBoundingRect.left;
 
       // Only perform the move when the mouse has crossed half of the items height
-      // When dragging downwards, only move when the cursor is below 50%
-      // When dragging upwards, only move when the cursor is above 50%
 
       if (
         dragIndex > hoverIndex &&
@@ -88,11 +87,6 @@ export const useImageDnd = (id: any, index: number, image: string) => {
       } else {
         return;
       }
-
-      // Note: we're mutating the monitor item here!
-      // Generally it's better to avoid mutations,
-      // but it's good here for the sake of performance
-      // to avoid expensive index searches.
 
       item.index = hoverIndex;
     },

@@ -8,19 +8,23 @@ import { ReducerActionKind } from "../utils/types/contextTypes";
 import useAnimation from "../hooks/useAnimation";
 
 export const Card = ({ id, image, index, selected, prevPos }: CardProps) => {
+  //states
   const { dispatch } = GlobalContext();
   const [isHovered, setHovered] = useState(true);
+
+  // hooks
   const { ref, isDragging, dragPreview, handlerId } = useImageDnd(
     id,
     index,
     image
   );
+  const { styles: animationStyle } = useAnimation(prevPos, index);
 
   const opacity = isDragging ? 0 : 1;
 
-  const { styles: animationStyle } = useAnimation(prevPos, index);
-
+  //useEffect is here
   useEffect(() => {
+    //disabling img preview
     dragPreview(getEmptyImage());
   }, [dragPreview]);
 
@@ -38,9 +42,11 @@ export const Card = ({ id, image, index, selected, prevPos }: CardProps) => {
         ref={ref}
         data-handler-id={handlerId}
         onDragEnd={() => setHovered(true)}
+        //disabling hover state when mouse is dragged but left the area
         onDragLeave={() => {
           setHovered(false);
         }}
+        //disabling hover state when dragged mouse comes
         onMouseOver={(e) => {
           if (e.buttons !== 1) {
             setHovered(true);
@@ -49,17 +55,19 @@ export const Card = ({ id, image, index, selected, prevPos }: CardProps) => {
           }
         }}
       >
+        {/* main img */}
         <img
           className="gallary__item__img"
           style={{ opacity }}
           src={image}
           alt=""
         />
+        {/* img overlay */}
         <div
           style={{ backgroundColor: !isHovered ? "transparent" : "" }}
           className={`gallary__item__overlay`}
         ></div>
-
+        {/* checkbox overlay */}
         <div
           className={`gallary__item__checkbox ${
             selected ? "showBackground" : "showOnlyOnHover"

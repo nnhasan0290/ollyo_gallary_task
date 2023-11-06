@@ -3,10 +3,13 @@ import { ReducerActionKind } from "../../utils/types/contextTypes";
 import CustomCheckMark from "./CustomCheckMark/CustomCheckMark";
 
 const GallaryHead = () => {
+  //states----
   const {
     state: { data: globalData },
     dispatch,
   } = GlobalContext();
+
+  //selected data
   const selectedData = globalData.filter((item) => item.selected === true);
 
   return (
