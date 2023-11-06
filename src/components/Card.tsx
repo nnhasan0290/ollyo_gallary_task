@@ -5,6 +5,7 @@ import { useImageDnd } from "../hooks/useImageDnD";
 import CustomCheckMark from "./ui/CustomCheckMark/CustomCheckMark";
 import { GlobalContext } from "../utils/Context";
 import { ReducerActionKind } from "../utils/types/contextTypes";
+import useAnimation from "../hooks/useAnimation";
 
 export const Card = ({ id, image, index, selected, prevPos }: CardProps) => {
   const { dispatch } = GlobalContext();
@@ -17,6 +18,8 @@ export const Card = ({ id, image, index, selected, prevPos }: CardProps) => {
 
   const opacity = isDragging ? 0 : 1;
 
+  const { styles: animationStyle } = useAnimation(prevPos, index);
+
   useEffect(() => {
     dragPreview(getEmptyImage());
   }, [dragPreview]);
@@ -27,6 +30,7 @@ export const Card = ({ id, image, index, selected, prevPos }: CardProps) => {
     >
       <div
         style={{
+          ...animationStyle,
           width: "100%",
           height: "100%",
         }}
