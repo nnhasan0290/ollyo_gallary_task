@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useAnimation = (prevPos: any, index: any, isDragging: any) => {
+const useAnimation = (prevPos: any, index: any) => {
   const [animation, setAnimation] = useState("");
   const addStylesheetRules = (rules: any) => {
     let styleEl = document.createElement("style");
@@ -10,9 +10,9 @@ const useAnimation = (prevPos: any, index: any, isDragging: any) => {
   };
 
   useEffect(() => {
-    let animationName = `anim`;
+    let animationName = `anim_${index}`;
     let keyframes = `
-        @-webkit-keyframes anim {
+        @-webkit-keyframes animationName {
             0% {-webkit-transform:translateX(${get_distance_x(
               prevPos,
               index
@@ -22,7 +22,7 @@ const useAnimation = (prevPos: any, index: any, isDragging: any) => {
         }`;
     addStylesheetRules(keyframes);
     setAnimation(animationName);
-  }, [prevPos, get_distance_x, index]);
+  }, [prevPos, index]);
 
   const styles = {
     animationName: `${animation}`,
@@ -45,10 +45,6 @@ const get_distance_x = (prevPos: any, index: any) => {
     gap_betw =
       distance_x > 0 ? distance_x - prevEl?.width : distance_x + prevEl?.width;
   }
-  console.log(gap_betw)
-
-  // console.log(currentEl_x);
-
-  // console.log(prevEl_x, currentEl_x, gap_betw, index);
+  console.log(gap_betw);
   return `${gap_betw}px`;
 };
